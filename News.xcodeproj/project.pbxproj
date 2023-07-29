@@ -21,6 +21,12 @@
 		567DAFF42A75726300A07EE6 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DAFF32A75726300A07EE6 /* NetworkRouter.swift */; };
 		567DAFF72A7574B300A07EE6 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DAFF62A7574B300A07EE6 /* Category.swift */; };
 		567DAFFC2A757D5000A07EE6 /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DAFFB2A757D5000A07EE6 /* CategoriesCell.swift */; };
+		567DB0012A75897D00A07EE6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB0002A75897D00A07EE6 /* NetworkManager.swift */; };
+		567DB0082A7589E300A07EE6 /* SourcesContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB0032A7589E300A07EE6 /* SourcesContract.swift */; };
+		567DB0092A7589E300A07EE6 /* SourcesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB0042A7589E300A07EE6 /* SourcesPresenter.swift */; };
+		567DB00A2A7589E300A07EE6 /* SourcesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB0052A7589E300A07EE6 /* SourcesRouter.swift */; };
+		567DB00B2A7589E300A07EE6 /* SourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB0062A7589E300A07EE6 /* SourcesViewController.swift */; };
+		567DB00C2A7589E300A07EE6 /* SourcesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB0072A7589E300A07EE6 /* SourcesInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +45,12 @@
 		567DAFF32A75726300A07EE6 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		567DAFF62A7574B300A07EE6 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		567DAFFB2A757D5000A07EE6 /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
+		567DB0002A75897D00A07EE6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		567DB0032A7589E300A07EE6 /* SourcesContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesContract.swift; sourceTree = "<group>"; };
+		567DB0042A7589E300A07EE6 /* SourcesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesPresenter.swift; sourceTree = "<group>"; };
+		567DB0052A7589E300A07EE6 /* SourcesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesRouter.swift; sourceTree = "<group>"; };
+		567DB0062A7589E300A07EE6 /* SourcesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesViewController.swift; sourceTree = "<group>"; };
+		567DB0072A7589E300A07EE6 /* SourcesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +100,8 @@
 		567DAFE32A7543C600A07EE6 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				567DB0022A7589C700A07EE6 /* Soruces */,
 				567DAFE42A7543FC00A07EE6 /* Categories */,
-				567DAFFB2A757D5000A07EE6 /* CategoriesCell.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -97,6 +109,7 @@
 		567DAFE42A7543FC00A07EE6 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				567DAFFF2A7586BD00A07EE6 /* Cell */,
 				567DAFE52A75463900A07EE6 /* CategoriesContract.swift */,
 				567DAFE62A75463900A07EE6 /* CategoriesPresenter.swift */,
 				567DAFE72A75463900A07EE6 /* CategoriesRouter.swift */,
@@ -110,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				567DAFF32A75726300A07EE6 /* NetworkRouter.swift */,
+				567DB0002A75897D00A07EE6 /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -120,6 +134,26 @@
 				567DAFF62A7574B300A07EE6 /* Category.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		567DAFFF2A7586BD00A07EE6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				567DAFFB2A757D5000A07EE6 /* CategoriesCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		567DB0022A7589C700A07EE6 /* Soruces */ = {
+			isa = PBXGroup;
+			children = (
+				567DB0032A7589E300A07EE6 /* SourcesContract.swift */,
+				567DB0042A7589E300A07EE6 /* SourcesPresenter.swift */,
+				567DB0052A7589E300A07EE6 /* SourcesRouter.swift */,
+				567DB0062A7589E300A07EE6 /* SourcesViewController.swift */,
+				567DB0072A7589E300A07EE6 /* SourcesInteractor.swift */,
+			);
+			path = Soruces;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,17 +232,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567DB0012A75897D00A07EE6 /* NetworkManager.swift in Sources */,
 				567DAFD42A75420600A07EE6 /* ViewController.swift in Sources */,
+				567DB00A2A7589E300A07EE6 /* SourcesRouter.swift in Sources */,
 				567DAFF72A7574B300A07EE6 /* Category.swift in Sources */,
 				567DAFD02A75420600A07EE6 /* AppDelegate.swift in Sources */,
 				567DAFFC2A757D5000A07EE6 /* CategoriesCell.swift in Sources */,
 				567DAFEC2A75463900A07EE6 /* CategoriesRouter.swift in Sources */,
 				567DAFD22A75420600A07EE6 /* SceneDelegate.swift in Sources */,
 				567DAFEA2A75463900A07EE6 /* CategoriesContract.swift in Sources */,
+				567DB00B2A7589E300A07EE6 /* SourcesViewController.swift in Sources */,
+				567DB0082A7589E300A07EE6 /* SourcesContract.swift in Sources */,
 				567DAFED2A75463900A07EE6 /* CategoriesViewController.swift in Sources */,
 				567DAFEE2A75463900A07EE6 /* CategoriesInteractor.swift in Sources */,
+				567DB0092A7589E300A07EE6 /* SourcesPresenter.swift in Sources */,
 				567DAFEB2A75463900A07EE6 /* CategoriesPresenter.swift in Sources */,
 				567DAFF42A75726300A07EE6 /* NetworkRouter.swift in Sources */,
+				567DB00C2A7589E300A07EE6 /* SourcesInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

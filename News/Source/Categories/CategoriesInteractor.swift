@@ -12,11 +12,19 @@ class CategoriesInteractor: PresenterToInteractorCategoriesProtocol {
 
     // MARK: Properties
     var presenter: InteractorToPresenterCategoriesProtocol?
-    var category: [Category]?
+    var category: [String]?
     
     func loadCategory() {
         let data = CategoryResponse.DataCategory()
-        self.category?.append(contentsOf: data.category)
+        let categoryName = data.category.compactMap({$0.name})
+        self.category = categoryName
         self.presenter?.getDataCategorySuccess(category: data.category)
+    }
+    
+    func retrieveCategory(at index: Int) {
+        guard let category = self.category, category.indices.contains(index) else {
+            return
+        }
+        self.presenter?.findCategorySuccess(self.category![index])
     }
 }

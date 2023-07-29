@@ -101,5 +101,6 @@ extension CategoriesViewController {
 extension CategoriesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
+        presenter?.didSelectRowAt(index: indexPath.row)
     }
 }

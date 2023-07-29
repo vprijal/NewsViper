@@ -23,6 +23,7 @@ protocol ViewToPresenterCategoriesProtocol {
     var router: PresenterToRouterCategoriesProtocol? { get set }
     
     func viewDidLoad()
+    func didSelectRowAt(index: Int)
 }
 
 
@@ -32,16 +33,18 @@ protocol PresenterToInteractorCategoriesProtocol {
     var presenter: InteractorToPresenterCategoriesProtocol? { get set }
     
     func loadCategory()
+    func retrieveCategory(at index: Int)
 }
 
 
 // MARK: Interactor Output (Interactor -> Presenter)
 protocol InteractorToPresenterCategoriesProtocol {
     func getDataCategorySuccess(category: [Category])
+    func findCategorySuccess(_ category: String)
 }
 
 
 // MARK: Router Input (Presenter -> Router)
 protocol PresenterToRouterCategoriesProtocol {
-    
+    func navigateToSource(on view: PresenterToViewCategoriesProtocol, with category: String)
 }
