@@ -41,8 +41,7 @@ extension SourcesViewController {
     func setupUI() {
         self.view.backgroundColor = .white
         self.view.addSubview(collectionView)
-        navigationItem.backButtonTitle = " "
-        self.navigationItem.title = "Sources"
+        navigationItem.backButtonTitle = ""
         collectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()

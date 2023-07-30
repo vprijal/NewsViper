@@ -67,6 +67,7 @@ class ArticleCell: UICollectionViewCell {
             make.right.equalToSuperview()
             make.height.equalTo(300)
         }
+        imageView.contentMode = .scaleAspectFill
         
         contentView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in

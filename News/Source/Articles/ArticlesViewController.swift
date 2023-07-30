@@ -40,7 +40,6 @@ extension ArticlesViewController: PresenterToViewArticlesProtocol{
 extension ArticlesViewController {
     func setupUI() {
         view.backgroundColor = .white
-        self.navigationItem.title = "Article"
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview()

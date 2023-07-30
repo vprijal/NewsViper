@@ -29,6 +29,7 @@ class CategoriesRouter: PresenterToRouterCategoriesProtocol {
     
     func navigateToSource(on view: PresenterToViewCategoriesProtocol, with category: String) {
         let sourceVC = SourcesRouter.createModule(category: category)
+        sourceVC.navigationItem.title = category
         let viewController = view as! CategoriesViewController
         viewController.navigationController?
             .pushViewController(sourceVC, animated: true)

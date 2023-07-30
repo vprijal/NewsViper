@@ -47,6 +47,7 @@ extension CategoriesViewController: PresenterToViewCategoriesProtocol{
 extension CategoriesViewController {
     func setupUI() {
         self.navigationItem.title = "NEWS"
+        self.navigationItem.backButtonTitle = ""
         self.view.backgroundColor = .white
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
