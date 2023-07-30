@@ -56,7 +56,7 @@ extension SourcesViewController {
         let _dataSource = GeneralCDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             let cell: SourceCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SourceCell", for: indexPath) as! SourceCell
             if let source = itemIdentifier as? Source {
-                cell.nameLabel.text = source.name
+                cell.setData(source: source)
             }
             return cell
         }

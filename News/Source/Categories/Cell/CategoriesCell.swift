@@ -11,11 +11,11 @@ import SnapKit
 
 class CategoriesCell: UICollectionViewCell {
 
-    lazy var nameLabel: UILabel = {
+    var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16)
-        label.text = "Month"
+        label.font = .systemFont(ofSize: 18)
+        label.text = "Title"
         label.textColor = UIColor(named: "#002E4E")
         return label
     }()
