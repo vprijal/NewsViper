@@ -28,4 +28,12 @@ class ArticlesRouter: PresenterToRouterArticlesProtocol {
         return viewController
     }
     
+    func navigateToDetailArticle(on view: PresenterToViewArticlesProtocol, with article: Article) {
+        let detailArticleVC = DetailsArticleRouter.createModule(article: article)
+        detailArticleVC.navigationItem.title = article.title
+        let viewController = view as! ArticlesViewController
+        viewController.navigationController?
+            .pushViewController(detailArticleVC, animated: true)
+    }
+    
 }

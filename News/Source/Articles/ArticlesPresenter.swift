@@ -19,6 +19,10 @@ class ArticlesPresenter: ViewToPresenterArticlesProtocol {
     func viewDidLoad() {
         interactor?.loadArticle()
     }
+    
+    func didSelectRowAt(index: Int) {
+        interactor?.retrieveArticle(at: index)
+    }
 }
 
 extension ArticlesPresenter: InteractorToPresenterArticlesProtocol {
@@ -27,5 +31,7 @@ extension ArticlesPresenter: InteractorToPresenterArticlesProtocol {
         view?.onFetchArticleSuccess(article: article)
     }
     
-    
+    func findArticleSuccess(_ article: Article) {
+        router?.navigateToDetailArticle(on: view!, with: article)
+    }
 }
