@@ -19,11 +19,19 @@ class SourcesPresenter: ViewToPresenterSourcesProtocol {
     func viewDidLoad() {
         interactor?.loadSource()
     }
+    
+    func didSelectRowAt(index: Int) {
+        interactor?.retrieveSources(at: index)
+    }
 }
 
 extension SourcesPresenter: InteractorToPresenterSourcesProtocol {
     func fetchSourceSuccess(source: [Source]) {
         self.source = source
         view?.onFetchSourceSuccess(source: source)
+    }
+    
+    func findSourcesSuccess(_ sourceId: String) {
+        router?.navigateToArticle(on: view!, with: sourceId)
     }
 }

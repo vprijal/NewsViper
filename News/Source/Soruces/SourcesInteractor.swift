@@ -27,4 +27,11 @@ class SourcesInteractor: PresenterToInteractorSourcesProtocol {
             }
         }
     }
+    
+    func retrieveSources(at index: Int) {
+        guard let source = self.source, source.indices.contains(index) else {
+            return
+        }
+        self.presenter?.findSourcesSuccess(source[index].id)
+    }
 }

@@ -95,5 +95,6 @@ extension SourcesViewController {
 extension SourcesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
+        presenter?.didSelectRowAt(index: indexPath.row)
     }
 }

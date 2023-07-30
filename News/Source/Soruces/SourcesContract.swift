@@ -23,6 +23,7 @@ protocol ViewToPresenterSourcesProtocol {
     var router: PresenterToRouterSourcesProtocol? { get set }
     var source: [Source] { get set}
     func viewDidLoad()
+    func didSelectRowAt(index: Int)
 }
 
 
@@ -34,16 +35,18 @@ protocol PresenterToInteractorSourcesProtocol {
     var network: NetworkManager { get set }
     
     func loadSource()
+    func retrieveSources(at index: Int)
 }
 
 
 // MARK: Interactor Output (Interactor -> Presenter)
 protocol InteractorToPresenterSourcesProtocol {
     func fetchSourceSuccess(source: [Source])
+    func findSourcesSuccess(_ sourceId: String)
 }
 
 
 // MARK: Router Input (Presenter -> Router)
 protocol PresenterToRouterSourcesProtocol {
-    
+    func navigateToArticle(on view: PresenterToViewSourcesProtocol, with sourceId: String)
 }

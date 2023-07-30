@@ -32,6 +32,11 @@
 		567DB0132A76414500A07EE6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 567DB0122A76414500A07EE6 /* Alamofire */; };
 		567DB0152A76417000A07EE6 /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB0142A76417000A07EE6 /* NetworkConfiguration.swift */; };
 		567DB0182A764FB700A07EE6 /* SourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB0172A764FB700A07EE6 /* SourceCell.swift */; };
+		567DB01F2A7659F300A07EE6 /* ArticlesContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB01A2A7659F300A07EE6 /* ArticlesContract.swift */; };
+		567DB0202A7659F300A07EE6 /* ArticlesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB01B2A7659F300A07EE6 /* ArticlesPresenter.swift */; };
+		567DB0212A7659F300A07EE6 /* ArticlesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB01C2A7659F300A07EE6 /* ArticlesRouter.swift */; };
+		567DB0222A7659F300A07EE6 /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB01D2A7659F300A07EE6 /* ArticlesViewController.swift */; };
+		567DB0232A7659F300A07EE6 /* ArticlesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567DB01E2A7659F300A07EE6 /* ArticlesInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +65,11 @@
 		567DB00F2A76410100A07EE6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		567DB0142A76417000A07EE6 /* NetworkConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
 		567DB0172A764FB700A07EE6 /* SourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCell.swift; sourceTree = "<group>"; };
+		567DB01A2A7659F300A07EE6 /* ArticlesContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesContract.swift; sourceTree = "<group>"; };
+		567DB01B2A7659F300A07EE6 /* ArticlesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesPresenter.swift; sourceTree = "<group>"; };
+		567DB01C2A7659F300A07EE6 /* ArticlesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesRouter.swift; sourceTree = "<group>"; };
+		567DB01D2A7659F300A07EE6 /* ArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
+		567DB01E2A7659F300A07EE6 /* ArticlesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +120,7 @@
 		567DAFE32A7543C600A07EE6 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				567DB0192A7659E100A07EE6 /* Articles */,
 				567DB0022A7589C700A07EE6 /* Soruces */,
 				567DAFE42A7543FC00A07EE6 /* Categories */,
 			);
@@ -176,6 +187,18 @@
 				567DB0172A764FB700A07EE6 /* SourceCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		567DB0192A7659E100A07EE6 /* Articles */ = {
+			isa = PBXGroup;
+			children = (
+				567DB01A2A7659F300A07EE6 /* ArticlesContract.swift */,
+				567DB01B2A7659F300A07EE6 /* ArticlesPresenter.swift */,
+				567DB01C2A7659F300A07EE6 /* ArticlesRouter.swift */,
+				567DB01D2A7659F300A07EE6 /* ArticlesViewController.swift */,
+				567DB01E2A7659F300A07EE6 /* ArticlesInteractor.swift */,
+			);
+			path = Articles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,8 +284,10 @@
 				567DAFD42A75420600A07EE6 /* ViewController.swift in Sources */,
 				567DB00A2A7589E300A07EE6 /* SourcesRouter.swift in Sources */,
 				567DAFF72A7574B300A07EE6 /* Category.swift in Sources */,
+				567DB0232A7659F300A07EE6 /* ArticlesInteractor.swift in Sources */,
 				567DAFD02A75420600A07EE6 /* AppDelegate.swift in Sources */,
 				567DAFFC2A757D5000A07EE6 /* CategoriesCell.swift in Sources */,
+				567DB0202A7659F300A07EE6 /* ArticlesPresenter.swift in Sources */,
 				567DAFEC2A75463900A07EE6 /* CategoriesRouter.swift in Sources */,
 				567DB00E2A763F0E00A07EE6 /* SourceResponse.swift in Sources */,
 				567DAFD22A75420600A07EE6 /* SceneDelegate.swift in Sources */,
@@ -270,13 +295,16 @@
 				567DAFEA2A75463900A07EE6 /* CategoriesContract.swift in Sources */,
 				567DB0152A76417000A07EE6 /* NetworkConfiguration.swift in Sources */,
 				567DB00B2A7589E300A07EE6 /* SourcesViewController.swift in Sources */,
+				567DB0212A7659F300A07EE6 /* ArticlesRouter.swift in Sources */,
 				567DB0082A7589E300A07EE6 /* SourcesContract.swift in Sources */,
 				567DAFED2A75463900A07EE6 /* CategoriesViewController.swift in Sources */,
 				567DAFEE2A75463900A07EE6 /* CategoriesInteractor.swift in Sources */,
 				567DB0092A7589E300A07EE6 /* SourcesPresenter.swift in Sources */,
 				567DAFEB2A75463900A07EE6 /* CategoriesPresenter.swift in Sources */,
 				567DAFF42A75726300A07EE6 /* NetworkRouter.swift in Sources */,
+				567DB01F2A7659F300A07EE6 /* ArticlesContract.swift in Sources */,
 				567DB00C2A7589E300A07EE6 /* SourcesInteractor.swift in Sources */,
+				567DB0222A7659F300A07EE6 /* ArticlesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
