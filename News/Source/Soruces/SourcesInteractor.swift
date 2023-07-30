@@ -28,10 +28,10 @@ class SourcesInteractor: PresenterToInteractorSourcesProtocol {
         }
     }
     
-    func retrieveSources(at index: Int) {
-        guard let source = self.source, source.indices.contains(index) else {
+    func retrieveSources(id: String) {
+        guard let source = self.source?.first(where: {$0.id == id}) else {
             return
         }
-        self.presenter?.findSourcesSuccess(source[index].id)
+        self.presenter?.findSourcesSuccess(source.id)
     }
 }

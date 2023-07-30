@@ -20,8 +20,8 @@ class SourcesPresenter: ViewToPresenterSourcesProtocol {
         interactor?.loadSource()
     }
     
-    func didSelectRowAt(index: Int) {
-        interactor?.retrieveSources(at: index)
+    func didSelectRowAt(id: String) {
+        interactor?.retrieveSources(id: id)
     }
 }
 

@@ -23,7 +23,7 @@ protocol ViewToPresenterSourcesProtocol {
     var router: PresenterToRouterSourcesProtocol? { get set }
     var source: [Source] { get set}
     func viewDidLoad()
-    func didSelectRowAt(index: Int)
+    func didSelectRowAt(id: String)
 }
 
 
@@ -35,7 +35,7 @@ protocol PresenterToInteractorSourcesProtocol {
     var network: NetworkManager { get set }
     
     func loadSource()
-    func retrieveSources(at index: Int)
+    func retrieveSources(id: String)
 }
 
 

@@ -25,7 +25,12 @@ class SourcesViewController: UIViewController {
     
     lazy var collectionView: UICollectionView = createCollectionView()
     lazy private var dataSource = self.configureDataSource()
-    
+    private var searchBar: UISearchController = {
+        let sb = UISearchController()
+        sb.searchBar.placeholder = "Enter Source Title"
+        sb.searchBar.searchBarStyle = .minimal
+        return sb
+    }()
 }
 
 extension SourcesViewController: PresenterToViewSourcesProtocol{
@@ -40,6 +45,11 @@ extension SourcesViewController: PresenterToViewSourcesProtocol{
 extension SourcesViewController {
     func setupUI() {
         self.view.backgroundColor = .white
+        searchBar.searchResultsUpdater = self
+        searchBar.delegate = self
+        navigationItem.searchController = searchBar
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
         self.view.addSubview(collectionView)
         navigationItem.backButtonTitle = ""
         collectionView.snp.makeConstraints { make in
@@ -94,6 +104,44 @@ extension SourcesViewController {
 extension SourcesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
-        presenter?.didSelectRowAt(index: indexPath.row)
+        if let item = self.dataSource.snapshot().itemIdentifiers[indexPath.row] as? Source {
+            presenter?.didSelectRowAt(id: item.id)
+        }
+    }
+}
+
+extension SourcesViewController: UISearchResultsUpdating, UISearchControllerDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        var snap = self.dataSource.snapshot()
+        let searchBar = searchController.searchBar
+        if let query = searchBar.text, query.trimmingCharacters(in: .whitespaces) != "" {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                if let source = self.presenter?.source, !source.isEmpty {
+                   
+                    if !snap.itemIdentifiers(inSection: .main).isEmpty {
+                        snap.deleteItems(snap.itemIdentifiers(inSection: .main))
+                    }
+                    var searchData: [Source] = []
+                    for element in source {
+                        if element.name.lowercased().contains(query.lowercased()) {
+                            searchData.append(element)
+                        }
+                    }
+                    snap.appendItems(searchData, toSection: .main)
+                    self.dataSource.apply(snap)
+                }
+            }
+        } else {
+            print("SEARCJ EMPTy")
+            if !snap.itemIdentifiers(inSection: .main).isEmpty {
+                snap.deleteItems(snap.itemIdentifiers(inSection: .main))
+            }
+            snap.appendItems(self.presenter?.source ?? [], toSection: .main)
+            self.dataSource.apply(snap)
+        }
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        print(searchController.searchBar)
     }
 }
