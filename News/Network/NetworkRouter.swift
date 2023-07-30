@@ -10,10 +10,11 @@ import Alamofire
 
 enum NetworkRouter: NetworkConfiguration {
     case getSources(category: String)
+    case article(id: String)
     
     var method: HTTPMethod {
         switch self {
-        case .getSources:
+        case .getSources, .article:
             return .get
         }
     }
@@ -22,6 +23,8 @@ enum NetworkRouter: NetworkConfiguration {
         switch self {
         case .getSources(let category):
             return.url(["category": category, "apiKey":"4a27365f23b24d8eb502b59016e31f07" ])
+        case .article(let id):
+            return.url(["sources": id, "apiKey":"4a27365f23b24d8eb502b59016e31f07" ])
         }
     }
     
@@ -29,6 +32,8 @@ enum NetworkRouter: NetworkConfiguration {
         switch self {
         case .getSources:
             return "/sources"
+        case .article:
+            return "/top-headlines"
         }
     }
     

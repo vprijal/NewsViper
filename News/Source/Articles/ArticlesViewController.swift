@@ -14,6 +14,7 @@ class ArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        presenter?.viewDidLoad()
     }
 
     // MARK: - Properties
@@ -23,6 +24,9 @@ class ArticlesViewController: UIViewController {
 
 extension ArticlesViewController: PresenterToViewArticlesProtocol{
     // TODO: Implement View Output Methods
+    func onFetchArticleSuccess(article: [Article]) {
+        print(article)
+    }
 }
 
 extension ArticlesViewController {

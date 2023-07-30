@@ -14,8 +14,18 @@ class ArticlesPresenter: ViewToPresenterArticlesProtocol {
     var view: PresenterToViewArticlesProtocol?
     var interactor: PresenterToInteractorArticlesProtocol?
     var router: PresenterToRouterArticlesProtocol?
+    var articles: [Article] = []
+    
+    func viewDidLoad() {
+        interactor?.loadArticle()
+    }
 }
 
 extension ArticlesPresenter: InteractorToPresenterArticlesProtocol {
+    func fetchArticleSuccess(article: [Article]) {
+        self.articles = article
+        view?.onFetchArticleSuccess(article: article)
+    }
+    
     
 }
