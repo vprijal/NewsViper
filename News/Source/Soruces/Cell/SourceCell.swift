@@ -25,7 +25,7 @@ class SourceCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 14)
         label.numberOfLines = 2
         label.text = "Descirption"
-        label.textColor = UIColor(named: "#002E4E")
+        label.textColor = .gray
         return label
     }()
     
@@ -34,7 +34,7 @@ class SourceCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
         label.text = "Country"
-        label.textColor = UIColor(named: "#002E4E")
+        label.textColor = .gray
         return label
     }()
     
