@@ -12,6 +12,7 @@ import Foundation
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewSourcesProtocol {
     func onFetchSourceSuccess(source: [Source])
+    func onFetchSourceFailure()
 }
 
 
@@ -43,6 +44,7 @@ protocol PresenterToInteractorSourcesProtocol {
 protocol InteractorToPresenterSourcesProtocol {
     func fetchSourceSuccess(source: [Source])
     func findSourcesSuccess(_ sourceId: String)
+    func fetchSourceFailure()
 }
 
 

@@ -14,6 +14,7 @@ class SourcesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        self.collectionView.setStateView(with: .loading)
         presenter?.viewDidLoad()
     }
 
@@ -36,9 +37,19 @@ class SourcesViewController: UIViewController {
 extension SourcesViewController: PresenterToViewSourcesProtocol{
     // TODO: Implement View Output Methods
     func onFetchSourceSuccess(source: [Source]) {
-        var snap = self.dataSource.snapshot()
-        snap.appendItems(source, toSection: .main)
-        self.dataSource.apply(snap)
+        self.collectionView.setStateView(with: .done) {
+            var snap = self.dataSource.snapshot()
+            snap.appendItems(source, toSection: .main)
+            self.dataSource.apply(snap)
+        }
+    }
+    
+    func onFetchSourceFailure() {
+        self.collectionView.setStateView(with: .retry) {
+            self.collectionView.setStateView(with: .loading) {
+                self.presenter?.viewDidLoad()
+            }
+        }
     }
 }
 

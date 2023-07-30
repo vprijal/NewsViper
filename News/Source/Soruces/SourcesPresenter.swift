@@ -31,6 +31,10 @@ extension SourcesPresenter: InteractorToPresenterSourcesProtocol {
         view?.onFetchSourceSuccess(source: source)
     }
     
+    func fetchSourceFailure() {
+        view?.onFetchSourceFailure()
+    }
+    
     func findSourcesSuccess(_ sourceId: String) {
         router?.navigateToArticle(on: view!, with: sourceId)
     }

@@ -24,6 +24,7 @@ class SourcesInteractor: PresenterToInteractorSourcesProtocol {
                 self.presenter?.fetchSourceSuccess(source: data?.sources ?? [])
             case .failure(let failure):
                 print(failure)
+                self.presenter?.fetchSourceFailure()
             }
         }
     }
