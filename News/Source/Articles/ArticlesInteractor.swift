@@ -24,6 +24,7 @@ class ArticlesInteractor: PresenterToInteractorArticlesProtocol {
                 self.presenter?.fetchArticleSuccess(article: response?.articles ?? [])
             case .failure(let error):
                 print(error)
+                self.presenter?.fetchArticleFailure()
             }
         }
     }

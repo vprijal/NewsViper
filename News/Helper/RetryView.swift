@@ -28,7 +28,7 @@ class RetryView: UIView {
         addSubview(buttonRetry)
         buttonRetry.setTitle("Retry", for: .normal)
         buttonRetry.setTitleColor(.black, for: .normal)
-        buttonRetry.backgroundColor = UIColor(named: "#002E4E")
+        buttonRetry.backgroundColor = .red
         buttonRetry.setTitleColor(.white, for: .normal)
         buttonRetry.setCorner(radius: 8)
         buttonRetry.snp.makeConstraints { make in

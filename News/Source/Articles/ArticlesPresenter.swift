@@ -31,6 +31,10 @@ extension ArticlesPresenter: InteractorToPresenterArticlesProtocol {
         view?.onFetchArticleSuccess(article: article)
     }
     
+    func fetchArticleFailure() {
+        view?.onFetchArticleFailure()
+    }
+    
     func findArticleSuccess(_ article: Article) {
         router?.navigateToDetailArticle(on: view!, with: article)
     }

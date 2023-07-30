@@ -14,6 +14,7 @@ class ArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        self.collectionView.setStateView(with: .loading)
         presenter?.viewDidLoad()
     }
 
@@ -36,13 +37,22 @@ class ArticlesViewController: UIViewController {
 extension ArticlesViewController: PresenterToViewArticlesProtocol{
     // TODO: Implement View Output Methods
     func onFetchArticleSuccess(article: [Article]) {
-        print(article)
-        var snap = self.dataSource.snapshot()
-        if !snap.itemIdentifiers(inSection: .main).isEmpty {
-            snap.deleteItems(snap.itemIdentifiers(inSection: .main))
+        self.collectionView.setStateView(with: .done) {
+            var snap = self.dataSource.snapshot()
+            if !snap.itemIdentifiers(inSection: .main).isEmpty {
+                snap.deleteItems(snap.itemIdentifiers(inSection: .main))
+            }
+            snap.appendItems(article, toSection: .main)
+            self.dataSource.apply(snap)
         }
-        snap.appendItems(article, toSection: .main)
-        self.dataSource.apply(snap)
+    }
+    
+    func onFetchArticleFailure() {
+        self.collectionView.setStateView(with: .retry) {
+            self.collectionView.setStateView(with: .loading) {
+                self.presenter?.viewDidLoad()
+            }
+        }
     }
 }
 

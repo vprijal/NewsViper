@@ -39,6 +39,9 @@ extension SourcesViewController: PresenterToViewSourcesProtocol{
     func onFetchSourceSuccess(source: [Source]) {
         self.collectionView.setStateView(with: .done) {
             var snap = self.dataSource.snapshot()
+            if !snap.itemIdentifiers(inSection: .main).isEmpty {
+                snap.deleteItems(snap.itemIdentifiers(inSection: .main))
+            }
             snap.appendItems(source, toSection: .main)
             self.dataSource.apply(snap)
         }

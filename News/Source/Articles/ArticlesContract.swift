@@ -12,6 +12,7 @@ import Foundation
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewArticlesProtocol {
     func onFetchArticleSuccess(article: [Article])
+    func onFetchArticleFailure()
 }
 
 
@@ -40,6 +41,7 @@ protocol PresenterToInteractorArticlesProtocol {
 // MARK: Interactor Output (Interactor -> Presenter)
 protocol InteractorToPresenterArticlesProtocol {
     func fetchArticleSuccess(article: [Article])
+    func fetchArticleFailure()
     func findArticleSuccess(_ article: Article)
 }
 
