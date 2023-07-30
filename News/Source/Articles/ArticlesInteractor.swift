@@ -28,10 +28,7 @@ class ArticlesInteractor: PresenterToInteractorArticlesProtocol {
         }
     }
     
-    func retrieveArticle(at index: Int) {
-        guard let article = self.article, article.indices.contains(index) else {
-            return
-        }
-        self.presenter?.findArticleSuccess(article[index])
+    func retrieveArticle(article: Article) {
+        self.presenter?.findArticleSuccess(article)
     }
 }

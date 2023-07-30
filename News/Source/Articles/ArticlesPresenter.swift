@@ -20,8 +20,8 @@ class ArticlesPresenter: ViewToPresenterArticlesProtocol {
         interactor?.loadArticle()
     }
     
-    func didSelectRowAt(index: Int) {
-        interactor?.retrieveArticle(at: index)
+    func didSelectRowAt(article: Article) {
+        interactor?.retrieveArticle(article: article)
     }
 }
 

@@ -25,6 +25,12 @@ class ArticlesViewController: UIViewController {
     
     lazy var collectionView: UICollectionView = createCollectionView()
     lazy private var dataSource = self.configureDataSource()
+    private var searchBar: UISearchController = {
+        let sb = UISearchController()
+        sb.searchBar.placeholder = "Enter Article Title"
+        sb.searchBar.searchBarStyle = .minimal
+        return sb
+    }()
 }
 
 extension ArticlesViewController: PresenterToViewArticlesProtocol{
@@ -32,6 +38,9 @@ extension ArticlesViewController: PresenterToViewArticlesProtocol{
     func onFetchArticleSuccess(article: [Article]) {
         print(article)
         var snap = self.dataSource.snapshot()
+        if !snap.itemIdentifiers(inSection: .main).isEmpty {
+            snap.deleteItems(snap.itemIdentifiers(inSection: .main))
+        }
         snap.appendItems(article, toSection: .main)
         self.dataSource.apply(snap)
     }
@@ -40,6 +49,11 @@ extension ArticlesViewController: PresenterToViewArticlesProtocol{
 extension ArticlesViewController {
     func setupUI() {
         view.backgroundColor = .white
+        searchBar.searchResultsUpdater = self
+        searchBar.delegate = self
+        navigationItem.searchController = searchBar
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
@@ -88,10 +102,47 @@ extension ArticlesViewController {
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
+    
+    func updateSearch(data: [Article], search: String) {
+        var snap = self.dataSource.snapshot()
+        if !snap.itemIdentifiers(inSection: .main).isEmpty {
+            snap.deleteItems(snap.itemIdentifiers(inSection: .main))
+        }
+        var searchData: [Article] = []
+        for element in data {
+            if element.title.lowercased().contains(search.lowercased()) {
+                searchData.append(element)
+            }
+        }
+        snap.appendItems(searchData, toSection: .main)
+        self.dataSource.apply(snap)
+    }
 }
 extension ArticlesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
-        presenter?.didSelectRowAt(index: indexPath.row)
+        if let item = self.dataSource.snapshot().itemIdentifiers[indexPath.row] as? Article {
+            presenter?.didSelectRowAt(article: item)
+        }
+    }
+}
+
+extension ArticlesViewController: UISearchResultsUpdating, UISearchControllerDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        if let query = searchBar.text, query.trimmingCharacters(in: .whitespaces) != "" {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                if let article = self.presenter?.articles, !article.isEmpty {
+                    self.updateSearch(data: article, search: query)
+                }
+            }
+        } else {
+            self.presenter?.view?.onFetchArticleSuccess(article: self.presenter?.articles ?? [])
+        }
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        print(searchController.searchBar)
+        self.presenter?.view?.onFetchArticleSuccess(article: self.presenter?.articles ?? [])
     }
 }

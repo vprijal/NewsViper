@@ -23,7 +23,7 @@ protocol ViewToPresenterArticlesProtocol {
     var router: PresenterToRouterArticlesProtocol? { get set }
     var articles: [Article] { get set}
     func viewDidLoad()
-    func didSelectRowAt(index: Int)
+    func didSelectRowAt(article: Article)
 }
 
 
@@ -33,7 +33,7 @@ protocol PresenterToInteractorArticlesProtocol {
     var presenter: InteractorToPresenterArticlesProtocol? { get set }
     var sourceID: String? {get set}
     func loadArticle()
-    func retrieveArticle(at index: Int)
+    func retrieveArticle(article: Article)
 }
 
 

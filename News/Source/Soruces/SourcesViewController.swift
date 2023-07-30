@@ -99,6 +99,21 @@ extension SourcesViewController {
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
+    
+    func updateSearch(data: [Source], search: String) {
+        var snap = self.dataSource.snapshot()
+        if !snap.itemIdentifiers(inSection: .main).isEmpty {
+            snap.deleteItems(snap.itemIdentifiers(inSection: .main))
+        }
+        var searchData: [Source] = []
+        for element in data {
+            if element.name.lowercased().contains(search.lowercased()) {
+                searchData.append(element)
+            }
+        }
+        snap.appendItems(searchData, toSection: .main)
+        self.dataSource.apply(snap)
+    }
 }
 
 extension SourcesViewController: UICollectionViewDelegate {
@@ -112,36 +127,21 @@ extension SourcesViewController: UICollectionViewDelegate {
 
 extension SourcesViewController: UISearchResultsUpdating, UISearchControllerDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        var snap = self.dataSource.snapshot()
+        
         let searchBar = searchController.searchBar
         if let query = searchBar.text, query.trimmingCharacters(in: .whitespaces) != "" {
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 if let source = self.presenter?.source, !source.isEmpty {
-                   
-                    if !snap.itemIdentifiers(inSection: .main).isEmpty {
-                        snap.deleteItems(snap.itemIdentifiers(inSection: .main))
-                    }
-                    var searchData: [Source] = []
-                    for element in source {
-                        if element.name.lowercased().contains(query.lowercased()) {
-                            searchData.append(element)
-                        }
-                    }
-                    snap.appendItems(searchData, toSection: .main)
-                    self.dataSource.apply(snap)
+                    self.updateSearch(data: source, search: query)
+                    
                 }
             }
         } else {
-            print("SEARCJ EMPTy")
-            if !snap.itemIdentifiers(inSection: .main).isEmpty {
-                snap.deleteItems(snap.itemIdentifiers(inSection: .main))
-            }
-            snap.appendItems(self.presenter?.source ?? [], toSection: .main)
-            self.dataSource.apply(snap)
+            self.presenter?.view?.onFetchSourceSuccess(source: self.presenter?.source ?? [])
         }
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {
-        print(searchController.searchBar)
+        self.presenter?.view?.onFetchSourceSuccess(source: self.presenter?.source ?? [])
     }
 }
