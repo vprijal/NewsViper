@@ -10,7 +10,7 @@ import UIKit
 
 
 // MARK: View Output (Presenter -> View)
-protocol PresenterToViewCategoriesProtocol: class {
+protocol PresenterToViewCategoriesProtocol {
     func onGetCategorySuccess(category: [String])
 }
 

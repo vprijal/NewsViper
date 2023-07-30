@@ -14,8 +14,16 @@ class SourcesPresenter: ViewToPresenterSourcesProtocol {
     var view: PresenterToViewSourcesProtocol?
     var interactor: PresenterToInteractorSourcesProtocol?
     var router: PresenterToRouterSourcesProtocol?
+    var source: [Source] = []
+    
+    func viewDidLoad() {
+        interactor?.loadSource()
+    }
 }
 
 extension SourcesPresenter: InteractorToPresenterSourcesProtocol {
-    
+    func fetchSourceSuccess(source: [Source]) {
+        self.source = source
+        view?.onFetchSourceSuccess(source: source)
+    }
 }

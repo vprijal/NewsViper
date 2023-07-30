@@ -11,7 +11,7 @@ import Foundation
 
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewSourcesProtocol {
-   
+    func onFetchSourceSuccess(source: [Source])
 }
 
 
@@ -21,6 +21,8 @@ protocol ViewToPresenterSourcesProtocol {
     var view: PresenterToViewSourcesProtocol? { get set }
     var interactor: PresenterToInteractorSourcesProtocol? { get set }
     var router: PresenterToRouterSourcesProtocol? { get set }
+    var source: [Source] { get set}
+    func viewDidLoad()
 }
 
 
@@ -29,12 +31,15 @@ protocol PresenterToInteractorSourcesProtocol {
     
     var presenter: InteractorToPresenterSourcesProtocol? { get set }
     var category: String? {get set}
+    var network: NetworkManager { get set }
+    
+    func loadSource()
 }
 
 
 // MARK: Interactor Output (Interactor -> Presenter)
 protocol InteractorToPresenterSourcesProtocol {
-    
+    func fetchSourceSuccess(source: [Source])
 }
 
 

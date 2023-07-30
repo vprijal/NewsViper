@@ -6,32 +6,60 @@
 //
 
 import Foundation
+import Alamofire
 
 class NetworkManager {
     
-    static let shared = NetworkManager()
+    typealias NetworkCompletion<T> = (Result<T, Error>) -> Void
     
-    private init() {}
-    
-    func getSources(for category: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    private var dataRequest: DataRequest?
+        let sessionManager: Session
+        static let shared: NetworkManager = NetworkManager()
+        
+        init() {
+            sessionManager = Session()
+        }
+        
+        @discardableResult
+        private func _dataRequest(
+            url: URLConvertible,
+            method: HTTPMethod = .get,
+            parameters: Parameters? = nil,
+            encoding: ParameterEncoding = URLEncoding.default,
+            headers: HTTPHeaders? = nil
+        )
+        -> DataRequest {
+            return sessionManager.request(
+                url,
+                method: method,
+                parameters: parameters,
+                encoding: encoding,
+                headers: headers
+            )
+        }
+        
+    func request<T: Codable>(route: NetworkRouter, completion: @escaping (Swift.Result<T?, Error>) -> Void) {
         do {
-            let request = try NetworkRouter.getSources(category: category).request()
-            
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
+            let request = try route.asURLRequest()
+            AF.request(request).responseData { response in
+                print(response.request?.url?.absoluteString ?? "")
                 
-                if let data = data {
-                    completion(.success(data))
-                } else {
-                    print("ERROR")
+                switch response.result {
+                case .success(let value):
+                    let decoder = JSONDecoder()
+                    do {
+                        let model = try decoder.decode(T.self, from: value)
+                        completion(.success(model))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    print("\(#line), \(#function), \(error.localizedDescription)")
+                    completion(.failure(error))
                 }
             }
-            
-            task.resume()
         } catch {
+            print("\(#line), \(#function), \(error.localizedDescription)")
             completion(.failure(error))
         }
     }

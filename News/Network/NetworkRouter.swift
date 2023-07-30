@@ -6,63 +6,58 @@
 //
 
 import Foundation
+import Alamofire
 
-enum NetworkRouter {
+enum NetworkRouter: NetworkConfiguration {
     case getSources(category: String)
     
-    private static let baseUrlString = "https://newsapi.org/v2"
-
-    
-    private enum HTTPMethod {
-        case get
-        
-        var value: String {
-            switch self {
-            case .get: return "GET"
-            }
-        }
-    }
-    
-    private var method: HTTPMethod {
+    var method: HTTPMethod {
         switch self {
         case .getSources:
             return .get
         }
     }
     
-    private var path: String {
+    var parameters: RequestParams {
         switch self {
         case .getSources(let category):
-            return "/sources?category\(category)?apiKey=4a27365f23b24d8eb502b59016e31f07"
+            return.url(["category": category, "apiKey":"4a27365f23b24d8eb502b59016e31f07" ])
         }
     }
     
-    func request() throws -> URLRequest {
-        let urlString = "\(NetworkRouter.baseUrlString)\(path)"
-        let components = URLComponents(string: urlString)!
-        
-        guard let url = components.url else {
-            throw ErrorType.parseUrlFail
-        }
-        
-        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: 10)
-        request.httpMethod = method.value
-        
+    var path: String {
         switch self {
         case .getSources:
-            return request
+            return "/sources"
         }
     }
     
-}
-
-enum ErrorType: LocalizedError {
-    case parseUrlFail
-    
-    var errorDescription: String? {
-        switch self {
-        case .parseUrlFail:
-            return "Cannot initial URL object"
+    func asURLRequest() throws -> URLRequest {
+        let url = try Constants.ProductionServer.baseURL.asURL()
+        
+        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        
+        //HTTP Method
+        urlRequest.httpMethod = method.rawValue
+        
+        //Common Headers
+        urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
+        urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
+        
+        //Parameters
+        
+        switch parameters {
+        case .body(let params):
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+        case .url(let params):
+            let queryParams = params.map { pair in
+                return URLQueryItem(name: pair.key, value: "\(pair.value)")
+            }
+            var components = URLComponents(string: url.appendingPathComponent(path).absoluteString)
+            components?.queryItems = queryParams
+            urlRequest.url = components?.url
         }
+        return urlRequest
     }
+    
 }
